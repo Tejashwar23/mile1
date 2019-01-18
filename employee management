@@ -1,0 +1,116 @@
+EMPLOYEEUTILITY.CS-----------------------------------------------------------------------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmployeeManagement.Utility
+{
+    public class EmployeeUtility
+    {
+        public void GenerateUserName(Employee obj,int EmployeeCount)
+        {
+            obj.UserID= ((char)(obj.FirstName[0] + obj.FirstName.Length)).ToString() + ((char)(obj.LastName[0] + obj.LastName.Length)).ToString() + SumDigits(obj.BirthYear).ToString() + SumDigits(obj.BirthMonth).ToString() + SumDigits(obj.BirthDay).ToString() + EmployeeCount.ToString();
+       }
+
+        public string SumDigits(int value)
+        {
+            int sum = 0;
+            while (value > 0)
+            {
+                sum += value % 10;
+                value = value / 10;
+            }
+            return sum.ToString();
+        }
+    }
+}
+
+
+EMPLOYEEDATA.CS------------------------------------------------------------------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmployeeManagement
+{
+    public class EmployeeData
+    {
+
+        List<Employee> emp = new List<Employee>();
+        public EmployeeData()
+        {
+            // TODO: Write your code here.
+        }
+        public string AddEmployee(Employee obj)
+        {
+            if (obj != null)
+            {
+                Utility.EmployeeUtility ue = new Utility.EmployeeUtility();
+                ue.GenerateUserName(obj, emp.Count + 1);
+                emp.Add(obj);
+                return obj.UserID;
+            }
+            else return null;
+
+        }
+
+        public bool ModifyEmployee(Employee obj)
+        {
+            bool b = false;
+            if (obj != null)
+            {
+                for(int i = 0; i < emp.Count; i++)
+                {
+                    if (emp[i].UserID == obj.UserID)
+                    {
+                        emp[i] = obj;
+                        b = true;
+                    }
+                }
+            }
+             return b;
+        }
+
+        public Employee SearchEmployee(string strUserID)
+        {
+            Employee e = null;
+            if (strUserID != null)
+            {
+                for (int i = 0; i < emp.Count; i++)
+                {
+                    if (emp[i].UserID == strUserID)
+                    {
+                        e = emp[i];
+                    }
+                }
+            }
+            return e;
+        }
+
+        public bool DeleteEmployee(string strUserID)
+        {
+            bool b = false;
+            if (strUserID != null)
+            {
+                for (int i = 0; i < emp.Count; i++)
+                {
+                    if (emp[i].UserID == strUserID)
+                    {
+                        emp.RemoveAt(i);
+                        b = true;
+                    }
+                }
+            }
+            return b;
+        }
+    }
+}
+
