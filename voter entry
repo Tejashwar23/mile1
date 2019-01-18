@@ -1,0 +1,136 @@
+VOTER MANAGEMENT.CS--------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+namespace VoterEntry
+{
+    public class VoterManagement
+    {
+        List<Voter> list = new List<Voter>();
+        public VoterManagement()
+        {
+           
+        }
+
+        public string AddVoter(Voter obj)
+        {
+            if (obj != null)
+            {
+                Utility.VoterUtility vu = new Utility.VoterUtility();
+                obj.VoterID = vu.GenerateVoterID(obj.FirstName, obj.LastName, obj.DateofBirth);
+                int a = DateTime.Now.Subtract(obj.DateofBirth).Days / 365;
+                if (a < 18)
+                {
+                    throw new VoterEntry.Exceptions.AgeException("Age shouldn't be less than 18");
+                }
+                else
+                {
+                    obj.Age = a;
+                }
+                list.Add(obj);
+                return obj.VoterID;
+            }
+            else return null;
+        }
+
+        public bool ModifyVoter(Voter obj)
+        {
+            bool t = false;
+            if (obj != null)
+            {
+                Utility.VoterUtility vu = new Utility.VoterUtility();
+                obj.VoterID = vu.GenerateVoterID(obj.FirstName, obj.LastName, obj.DateofBirth);
+                int a = DateTime.Now.Subtract(obj.DateofBirth).Days / 365;
+                if (a < 18)
+                {
+                    throw new VoterEntry.Exceptions.AgeException("Age shouldn't be less than 18");
+                }
+                else
+                {
+                    obj.Age = a;
+                }
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (obj.VoterID == list[i].VoterID)
+                    {
+                        list[i] = obj;
+                       t= true;
+                    }
+                }
+            }
+            return t;
+        }
+
+        public Voter SearchVoter(string strVoterID)
+        {
+            Voter o = null;
+            if (strVoterID != null)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (strVoterID == list[i].VoterID)
+                    {
+                      o=  list[i] ;
+                        
+                    }
+                }
+            }
+            return o;
+        }
+
+        public bool DeleteVoter(string strVoterID)
+        {
+            bool b = false; 
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (strVoterID == list[i].VoterID)
+                {
+                    list.RemoveAt(i);
+                    b = true;
+                }
+            }
+            return b;.
+
+        }
+
+        public List<Voter> GetVoterList()
+        {
+            return list;
+        }
+    }
+}
+
+VOTER UTILITY.CS-----------------------------------------------------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace VoterEntry.Utility
+{
+    public class VoterUtility
+    {
+        public string GenerateVoterID(string strFirstName, string strLastName, DateTime dtDateofBirth)
+        {
+          return  strFirstName[0].ToString() + strLastName[0].ToString() + dtDateofBirth.DayOfWeek.ToString()[0] + strFirstName.Length.ToString() + strLastName.Length.ToString() + sum(dtDateofBirth.Month) + sum(dtDateofBirth.Day) + sum(dtDateofBirth.Year);
+
+        }
+        public string sum(int i)
+        {
+           
+            int s = 0;
+            while (i > 0)
+            {
+               s=s+ ( i % 10);
+                i = i / 10; 
+            }
+            return s.ToString();       
+        }       
+    }
+}
+
+
+
