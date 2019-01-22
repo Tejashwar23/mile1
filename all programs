@@ -204,6 +204,60 @@ char[] num1 = input1.ToCharArray();
 		Console.WriteLine(str1);
 		return str1;
 		
+4.token sequence of 3 persons-----------------------------------------------------------------------------------------
+
+   int[] a=new int[input1];
+		string res=String.Empty;
+		int count=1,maxlen=0,curridx=0,maxidx=0;
+		for(int i=0;i<input1;i++)
+		{
+			a[i]=input3[i];
+		}
+		Array.Sort(a);
+		for(int j=0;j<input1-1;j++)
+		{
+			if(a[j]+1==a[j+1])
+			{
+				count++;
+				if(count==2)
+				{
+					curridx=j;
+				}	
+			}
+			else
+			{
+				if(count>maxlen&&count!=1)
+				{
+					maxidx=curridx;
+					maxlen=count;
+				}
+				count=1;
+			}
+		}
+		if(count>maxlen&&count!=1)
+				{
+					maxidx=curridx;
+					maxlen=count;
+				}
+		if(maxlen<3)
+		{
+			res="NONE"+":";
+		}
+		else
+	        {
+		  for(int u=maxidx;u<maxidx+maxlen;u++)
+		  {
+			for(int g=0;g<input1;g++)
+			{
+				if(a[u]==input3[g])
+				{
+					res+=input2[g]+":";
+				}
+			}
+		  }
+	        }
+		return res.Substring(0,res.Length-1);
+
 
 
 
