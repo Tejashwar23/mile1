@@ -409,5 +409,61 @@ public class UserMainCode
     }
 }
 
+11. OCCURANCE AND NON OCCURANCE OF CHARACTERS (IOOOOIC)
+
+	public string Abc()
+        {
+            string s1 = "";
+            string s2 = "";
+            if (input4 == 1)
+            {
+                s1 = input1.ToUpper();
+                s2 = input1.ToUpper();
+            }
+            else
+            {
+                s1 = input1.ToLower();
+                s2 = input1.ToLower();
+            }
+            string res = "";
+            if (input3 == 0)
+            {
+                foreach(char c in s1)
+                {
+                    if (!s2.Contains(c.ToString()))
+                    {
+                        res += c;
+                    }
+                }
+                foreach (char c in s2)
+                {
+                    if (!s1.Contains(c.ToString()))
+                    {
+                        res += c;
+                    }
+                }
+
+            }
+            else if (input3 == 1)
+            {
+                foreach (char c in s1)
+                {
+                    if (s2.Contains(c.ToString()))
+                    {
+                        res += c;
+                    }
+                }
+                foreach (char c in s2)
+                {
+                    if (s1.Contains(c.ToString()))
+                    {
+                        res += c;
+                    }
+                }
+            }
+            return res;
+        }
+
+
 
 
