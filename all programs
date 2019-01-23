@@ -260,63 +260,100 @@ char[] num1 = input1.ToCharArray();
 		
 5.TRAVERSE OF ADDRESS AND KEY------------------------------------------------------------------------------
 
-int[] a=new int[input1];
-		string res=String.Empty;
-		int count=1,maxlen=0,curridx=0,maxidx=0;
-		for(int i=0;i<input1;i++)
-		{
-			a[i]=input3[i];
-		}
-		Array.Sort(a);
-		for(int j=0;j<input1-1;j++)
-		{
-			if(a[j]+1==a[j+1])
-			{
-				count++;
-				if(count==2)
+
+
+
+
+6.WIPRO TECHNOLOGIES BANGALORE--------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+
+//Read only region start
+public class UserMainCode
+{
+    public string reverseWordsandCase(string input1,int input2)
+    {
+        //Read only region end
+        //Write code here
+		string [] arr=input1.Split();
+		string res="";
+                if(input2==0)
 				{
-					curridx=j;
-				}	
-			}
-			else
-			{
-				if(count>maxlen&&count!=1)
-				{
-					maxidx=curridx;
-					maxlen=count;
+					for(int i=0;i<arr.Length;i++)
+					{
+						char[]ch=arr[i].ToCharArray();
+						Array.Reverse(ch);
+						res+=new string(ch)+" ";
+					}
 				}
-				count=1;
-			}
-		}
-		if(count>maxlen&&count!=1)
+		        else
 				{
-					maxidx=curridx;
-					maxlen=count;
+					for(int i=0;i<arr.Length;i++)
+					{
+						char[]ch=arr[i].ToCharArray();
+						int l=ch.Length;
+						if(char.IsLetter(ch[l-1]))
+						{
+							if(char.IsUpper(ch[0]))
+							{
+								ch[l-1]=char.ToUpper(ch[l-1]);
+								ch[0]=char.ToLower(ch[0]);
+							}
+						}
+					
+						Array.Reverse(ch);
+						res+=new string(ch)+" ";
+					}
 				}
-		if(maxlen<3)
-		{
-			res="NONE"+":";
-		}
-		else
-	   {
-		  for(int u=maxidx;u<maxidx+maxlen;u++)
-		  {
-			for(int g=0;g<input1;g++)
-			{
-				if(a[u]==input3[g])
-				{
-					res+=input2[g]+":";
-				}
-			}
-		  }
-	   }
 		return res.Substring(0,res.Length-1);
+    }
+}
 
 
-6.
+7.nTH PRIME---------------------------------------------------------------------------------------------
 
+ int num = 1, i;
+            int count = 0;
 
+            while (count < n)
+            {
+                num = num + 1;
+                for ( i = 2; i <= num; i++)
+                {
+                    if (num % i == 0)
+                    {
+                        break;
+                    }
+                }
+                if (i == num)
+                {
+                    count = count + 1;
+                }
+            }
+	    
+8.prime RANGE-----------------------------------------------------------------------------------------
 
+ int c = 0, count = 0;
+            int input1 = int.Parse(Console.ReadLine());
+            int input2 = int.Parse(Console.ReadLine());
+            for (int i = input1; i <= input2; i++)
+            {
+                c = 0;
+                for (int j = 2; j <= i / 2; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        ++c;
+                        break;
+                    }
+                }
+                if (c == 0)
+                {
+                    ++count;
+                }
+		
+		9.
 
             
             
